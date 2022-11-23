@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model User {
+  id          String       @id
+  email       String       @unique
+  username    String       @unique
+  name        String
+  password    String
+  avatar      String
+  createdAt   String
+  bio         String       @default("Just a developer")
+  website     String?
+  posts       Post[]
+  hifus       Hifu[]
+}
+
+model Code {
+  id          String       @id
+  html        String       @db.Text
+  css         String       @db.Text
+  js          String       @db.Text
+  hifu        Hifu         @relation(fields: [hifuId], references: [id])
+  hifuId      String       @unique
+}
+
+model Hifu {
+  id          String       @id
+  createdAt   String
+  title       String
+  description String
+  code        Code?
+  author      User         @relation(fields: [authorId], references: [id])
+  authorId    String
+}
+
+model Post {
+  id          String       @id
+  title       String
+  body        String
+  createdAt   String
+  updatedAt   String
+  published   Boolean
+  author      User         @relation(fields: [authorId], references: [id])
+  authorId    String
+}
+
+model ShortenedLink {
+  id          Int          @id @default(autoincrement())
+  link        String
+  slug        String       @unique
+  createdAt   DateTime       @default(now()) 
+
+  @@index(slug)
+}
+
+enum Category {
+  PAGE
+  COMPONENT
+  MENU
+  MISCELLANOUS
+  CARD
+  FORM
+  LAYOUT
+  NAVIGATION
+  TABLE
+  TEXT
+  WIDGET
+}
