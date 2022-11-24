@@ -1,7 +1,7 @@
 export default function UserLayout({children}) {
   return (
     <>
-    <section className="unique-user page">
+    <section className="">
       {children}
     </section>
     </>

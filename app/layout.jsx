@@ -6,11 +6,17 @@ import Footer from '@components/Footer'
 export default function RootLayout({ children }) {
   return (
     <html>
-      <head />
+      <head>
+        <title>Coda</title>
+      </head>
       <body>
-        <Aside />
-        {children}
-        <Footer />
+        <div className="coda">
+          <UserProvider>
+            <Aside />
+            {children}
+            <Footer />
+          </UserProvider>
+        </div>
       </body>
     </html>
   )

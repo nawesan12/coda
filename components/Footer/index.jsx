@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <>
-    <footer>
+    <footer className="footer">
       <section className="credits">
         <p>Powered by <a href="https://nsantillan.tech/en" target="_blank" rel="noreferrer">Nahuel Santillan</a></p>
         <span>And the <a href="https://devspot.vercel.app">Devspot</a> team</span>
@@ -17,7 +17,7 @@ export default function Footer() {
     </footer>
 
     <style jsx>{`
-      footer {
+      .footer {
         display:flex;
         justify-content:center;
         align-items:center;
